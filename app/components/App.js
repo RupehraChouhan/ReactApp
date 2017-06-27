@@ -1,11 +1,8 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 
-var App = React.createClass({
-  render: function () {
-    return (
-      <h1>Hello World!</h1>
-    );
-  }
-});
+//At first I thought that you cannot export and element...
+//turns out you can..
+const appElement = <p>This is an element. You can export them and they are immutable!</p>;
 
-module.exports = App;
+module.exports = appElement;
