@@ -9777,14 +9777,13 @@ function tick() {
   const elem = React.createElement(
     'div',
     null,
-    React.createElement('br', null),
     React.createElement(
       'p',
       null,
-      'The only way to update the UI is to create a new element. Put the element inside a function to create a component and then call the function otherwise it won\'t show!!'
+      'The only way to update the UI is to create a new element. Put the element inside a function to create a component and then call the function otherwise it won\'t show!! Below is an example of updating UI.'
     ),
     React.createElement(
-      'h2',
+      'h3',
       null,
       'It is ',
       new Date().toLocaleTimeString(),
@@ -9793,6 +9792,8 @@ function tick() {
   );
   ReactDOM.render(elem, document.getElementById('tick'));
 }
+setInterval(tick, 1000);
+
 function WelcomeComponent(props) {
   return React.createElement(
     'div',
@@ -9800,13 +9801,54 @@ function WelcomeComponent(props) {
     React.createElement(
       'h1',
       null,
-      'Welcome, ',
-      pros.name
+      'Elements and Components'
     ),
-    ');'
+    React.createElement(
+      'p',
+      null,
+      'In addition to representing DOM tags, elements can also represent user-defined component. In the heading below, a component with prop name="Rupehra" was assigned to an element.'
+    ),
+    React.createElement(
+      'h3',
+      null,
+      'Welcome, ',
+      props.name
+    )
   );
 }
-setInterval(tick, 1000);
+const element = React.createElement(WelcomeComponent, { name: 'Rupehra' });
+ReactDOM.render(element, document.getElementById('elementRepresentingComponent'));
+
+function SayHi(props) {
+  return React.createElement(
+    'p',
+    null,
+    ' Hi ',
+    props.name,
+    '!'
+  );
+}
+
+function CallSayHi() {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Composing Components'
+    ),
+    React.createElement(
+      'p',
+      null,
+      'Components can refer to other components in the output. Below I am calling a component multiple times with different props.'
+    ),
+    React.createElement(SayHi, { name: 'Qamar' }),
+    React.createElement(SayHi, { name: 'Chaittali' }),
+    React.createElement(SayHi, { name: 'Alison' })
+  );
+}
+ReactDOM.render(React.createElement(CallSayHi, null), document.getElementById('composingComponent'));
 
 /***/ }),
 /* 84 */
@@ -22434,9 +22476,18 @@ var ReactDOM = __webpack_require__(57);
 //At first I thought that you cannot export and element...
 //turns out you can..
 const appElement = React.createElement(
-  'p',
+  'div',
   null,
-  'This is an element. You can export them and they are immutable!'
+  React.createElement(
+    'h1',
+    null,
+    'Elements'
+  ),
+  React.createElement(
+    'p',
+    null,
+    'This is an element. You can export them and they are immutable!'
+  )
 );
 
 module.exports = appElement;

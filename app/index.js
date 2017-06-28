@@ -59,3 +59,47 @@ ReactDOM.render(
   <CallSayHi />,
   document.getElementById('composingComponent')
 );
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>State and Lifecycle</h1>
+        <p>Components defined as classes have some additional features
+        such as a 'state'. We assign the initial state in the class
+      constructor. Class components should always call the base
+      constructor with props, for example 'super(props)'. Also adding
+      lifecycle hooks such as componentDidMount() which runs after the
+    component has been rendered to the DOM and componentWillUnmount()
+  which tears down the set up.</p>
+      <p>It is {this.state.date.toLocaleTimeString()}.</p>
+      <p>Summarizing how the clock above is working: The class renders the
+      initial state of the component which is set in the constructor. After
+    the component has rendered, it calls componentDidMount() which calls the
+  function tick() every second. Tick() sets the state to new date. When the
+state changes to the new date the component re-renders to display the change.</p>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Clock />, document.getElementById('clock'));
