@@ -103,3 +103,41 @@ state changes to the new date the component re-renders to display the change.</p
 }
 
 ReactDOM.render(<Clock />, document.getElementById('clock'));
+
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+    //this can also be written like this
+    // this.setState(function(prevState) {
+    //   return {
+    //     isToggleOn: !prevState.isToggleOn
+    //   };
+    // });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Handling Events</h1>
+        <p>This is an example of handling an event. It is important to bind the
+        event handler in the constructor.</p>
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? "ON" : "OFF"}
+        </button>
+        <p>this.setState accepts function with prevState and props. Good to
+        pass a function to setState rather than an object to handle asynchronous
+      updates</p>
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Toggle />, document.getElementById('toggle'));

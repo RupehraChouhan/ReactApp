@@ -9850,6 +9850,102 @@ function CallSayHi() {
 }
 ReactDOM.render(React.createElement(CallSayHi, null), document.getElementById('composingComponent'));
 
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        'State and Lifecycle'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'Components defined as classes have some additional features such as a \'state\'. We assign the initial state in the class constructor. Class components should always call the base constructor with props, for example \'super(props)\'. Also adding lifecycle hooks such as componentDidMount() which runs after the component has been rendered to the DOM and componentWillUnmount() which tears down the set up.'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'It is ',
+        this.state.date.toLocaleTimeString(),
+        '.'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'Summarizing how the clock above is working: The class renders the initial state of the component which is set in the constructor. After the component has rendered, it calls componentDidMount() which calls the function tick() every second. Tick() sets the state to new date. When the state changes to the new date the component re-renders to display the change.'
+      )
+    );
+  }
+}
+
+ReactDOM.render(React.createElement(Clock, null), document.getElementById('clock'));
+
+class Toggle extends React.Component {
+  constructor(props) {
+    this.state = { isToggleOn: true };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+    //this can also be written like this
+    // this.setState(function(prevState) {
+    //   return {
+    //     isToggleOn: !prevState.isToggleOn
+    //   };
+    // });
+  }
+
+  render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        'Handling Events'
+      ),
+      React.createElement(
+        'p',
+        null,
+        'This is an example of handling events. It is important to bind the event handler in the constructor.'
+      ),
+      React.createElement(
+        'button',
+        { onClick: this.handleClick },
+        this.state.isToggleOn ? ON : OFF
+      ),
+      React.createElement(
+        'p',
+        null,
+        'this.setState accepts function with prevState and props. Good to pass a function to setState rather than an object to handle asynchronous updates'
+      )
+    );
+  }
+}
+ReactDOM.render(React.createElement(Toggle, null), document.getElementById('toggle'));
+
 /***/ }),
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
