@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var appElement = require('./components/App');
+import {Button} from 'react-bootstrap';
 
 ReactDOM.render(appElement, document.getElementById('element'));
 
@@ -130,9 +131,9 @@ class Toggle extends React.Component {
         <h1>Handling Events</h1>
         <p>This is an example of handling an event. It is important to bind the
         event handler in the constructor.</p>
-        <button onClick={this.handleClick}>
+      <Button bsStyle="primary" onClick={this.handleClick}>
           {this.state.isToggleOn ? "ON" : "OFF"}
-        </button>
+        </Button>
         <p>this.setState accepts function with prevState and props. Good to
         pass a function to setState rather than an object to handle asynchronous
       updates</p>
