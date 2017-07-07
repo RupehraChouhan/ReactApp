@@ -13,6 +13,7 @@
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1",
+    "react-scrollchor": "^4.0.0",
     "react-scrollspy": "^3.2.0"
   },
   "devDependencies": {
